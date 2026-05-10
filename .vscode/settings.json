@@ -1,0 +1,4 @@
+{
+  "git.ignoreLimitWarning": true,
+  "chat.agent.maxRequests": 1000
+}

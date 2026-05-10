@@ -1,0 +1,17 @@
+{
+  "name": "traveloop-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace backend",
+    "dev:backend": "npm run dev --workspace backend",
+    "dev:frontend": "npm run dev --workspace frontend",
+    "migrate": "npm run migrate --workspace backend",
+    "seed": "npm run seed --workspace backend",
+    "demo": "npm run demo --workspace backend"
+  }
+}
