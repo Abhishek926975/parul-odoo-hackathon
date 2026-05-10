@@ -57,6 +57,17 @@ app.use("/api/admin", adminRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Traveloop API listening on http://localhost:${port}`);
+});
+
+server.on("error", (error) => {
+  if (error.code === "EADDRINUSE") {
+    console.error(`Port ${port} is already in use.`);
+    console.error("Close the other process or set PORT to another value before starting the backend.");
+    console.error("PowerShell example: $env:PORT=5001; npm run dev:backend");
+    process.exit(1);
+  }
+
+  throw error;
 });

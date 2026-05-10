@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --traveloop-sand: #f5a623;
+  --traveloop-midnight: #2c3e50;
+  --traveloop-mist: #f7f4ef;
+  --traveloop-clay: #d97757;
+  --traveloop-sea: #4ba3c3;
+  --traveloop-forest: #335c4f;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  background: linear-gradient(180deg, #fffaf4 0%, #f7f4ef 58%, #eef7f8 100%);
+  color: var(--traveloop-midnight);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(245, 166, 35, 0.28);
+}
+
+@layer components {
+  .traveloop-card {
+    @apply rounded-lg border border-traveloop-border bg-white shadow-card;
+  }
+
+  .traveloop-button {
+    @apply inline-flex min-h-10 items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold transition duration-200 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .traveloop-button-primary {
+    @apply traveloop-button bg-traveloop-sand text-white shadow-card hover:bg-traveloop-sand-dark;
+  }
+
+  .traveloop-button-secondary {
+    @apply traveloop-button border border-traveloop-border bg-white text-traveloop-midnight hover:border-traveloop-sand hover:text-traveloop-sand-dark;
+  }
+
+  .traveloop-input {
+    @apply w-full rounded-lg border border-traveloop-border bg-white px-3 py-2.5 text-sm text-traveloop-midnight outline-none transition focus:border-traveloop-sand focus:ring-4 focus:ring-traveloop-sand/15;
+  }
+
+  .traveloop-label {
+    @apply mb-1.5 block text-sm font-semibold text-traveloop-midnight;
+  }
+}
+
+@media print {
+  header,
+  nav,
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  body {
+    background: white;
+  }
+}
+
+.print-only {
+  display: none;
+}
+
+.traveloop-404-orbit {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  border-radius: 999px;
+  border: 2px dashed rgba(44, 62, 80, 0.15);
+  display: grid;
+  place-items: center;
+  animation: orbit 14s linear infinite;
+}
+
+.traveloop-404-planet {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 30%, #f5a623, #d97757 60%, #2c3e50 100%);
+  box-shadow: 0 24px 40px rgba(44, 62, 80, 0.2);
+}
+
+.traveloop-404-compass {
+  position: absolute;
+  width: 92px;
+  height: 92px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 6px solid rgba(44, 62, 80, 0.12);
+  box-shadow: 0 14px 30px rgba(44, 62, 80, 0.18);
+  animation: compass 4s ease-in-out infinite;
+}
+
+.traveloop-404-compass::before {
+  content: "";
+  position: absolute;
+  inset: 22px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #f5a623, #2c3e50);
+  transform: rotate(45deg);
+}
+
+@keyframes orbit {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes compass {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}

@@ -10,6 +10,8 @@
     "dev": "npm run dev --workspace backend",
     "dev:backend": "npm run dev --workspace backend",
     "dev:frontend": "npm run dev --workspace frontend",
+    "db:check": "npm run db:check --workspace backend",
+    "db:create": "npm run db:create --workspace backend",
     "migrate": "npm run migrate --workspace backend",
     "seed": "npm run seed --workspace backend",
     "demo": "npm run demo --workspace backend"

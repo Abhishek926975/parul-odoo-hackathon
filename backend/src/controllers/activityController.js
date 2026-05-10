@@ -4,7 +4,15 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { pagination } from "../utils/dbHelpers.js";
 
 export const listActivities = asyncHandler(async (request, response) => {
-  const { q = "", search = "", city = "", category = "", max_cost = "" } = request.query;
+  const {
+    q = "",
+    search = "",
+    city = "",
+    category = "",
+    max_cost = "",
+    min_duration = "",
+    max_duration = "",
+  } = request.query;
   const term = search || q;
   const { limit, offset } = pagination(request, 20);
   const result = await query(
@@ -13,8 +21,10 @@ export const listActivities = asyncHandler(async (request, response) => {
        AND ($3 = '' OR city ILIKE $4)
        AND ($5 = '' OR category::text = $5)
        AND ($6 = '' OR estimated_cost <= NULLIF($6, '')::numeric)
+       AND ($7 = '' OR duration_hours >= NULLIF($7, '')::numeric)
+       AND ($8 = '' OR duration_hours <= NULLIF($8, '')::numeric)
      ORDER BY is_featured DESC, created_at DESC`,
-    [term, `%${term}%`, city, `%${city}%`, category, max_cost],
+    [term, `%${term}%`, city, `%${city}%`, category, max_cost, min_duration, max_duration],
   );
 
   response.json({ success: true, data: { activities: result.rows.slice(offset, offset + limit), total: result.rowCount } });

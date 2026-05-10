@@ -7,7 +7,8 @@ export const listPosts = asyncHandler(async (request, response) => {
   const { search = "", sort = "recent", tag = "" } = request.query;
   const orderBy = sort === "popular" ? "community_posts.likes_count DESC" : "community_posts.created_at DESC";
   const result = await query(
-    `SELECT community_posts.*, trips.name AS trip_name, trips.public_slug, users.first_name, users.last_name
+    `SELECT community_posts.*, trips.name AS trip_name, trips.public_slug, trips.cover_photo_url,
+            users.first_name, users.last_name
      FROM community_posts
      JOIN trips ON trips.id = community_posts.trip_id
      JOIN users ON users.id = community_posts.user_id
@@ -49,7 +50,8 @@ export const createPost = asyncHandler(async (request, response) => {
 
 export const getPost = asyncHandler(async (request, response) => {
   const result = await query(
-    `SELECT community_posts.*, trips.name AS trip_name, trips.public_slug, users.first_name, users.last_name
+    `SELECT community_posts.*, trips.name AS trip_name, trips.public_slug, trips.cover_photo_url,
+            users.first_name, users.last_name
      FROM community_posts
      JOIN trips ON trips.id = community_posts.trip_id
      JOIN users ON users.id = community_posts.user_id
